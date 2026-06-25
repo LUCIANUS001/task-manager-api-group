@@ -19,7 +19,7 @@ router.delete("/:id", (req, res) => {
 });
 
      //POST  TASK ENDPOINT BY EMMANUEL ABRAHAM
-router.post('/task', (req, res) => {
+router.post('/', (req, res) => {
   const { title, status } = req.body;
   // Validate required fields
   if (!title )  return res.status(400).json({ message: 'Title is required.'});
