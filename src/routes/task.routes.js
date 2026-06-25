@@ -1,6 +1,6 @@
 const app = require("../app");
 const router = require("express").Router();
-let task = require("./data/task");
+let task = require("../data/task");
 
 //Delete a task by ID: Endpoint done by Jason Chukwuebuka
 router.delete("/:id", (req, res) => {
