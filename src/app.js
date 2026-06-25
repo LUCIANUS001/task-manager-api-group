@@ -1,13 +1,33 @@
 const express = require('express');
 const app = express();
-const port = 5000;
 
 app.use(express.json());
 
-app.get('/', (req, res) => {
-    res.send('Task Manager API is running!');
+// Sample tasks
+const tasks = [
+    { id: 1, title: 'Task One', status: 'pending' },
+    { id: 2, title: 'Task Two', status: 'completed' }
+];
+
+// GET /tasks/:id
+app.get('/tasks/:id', (req, res) => {
+    const id = parseInt(req.params.id);
+
+    const task = tasks.find(task => task.id === id);
+
+    if (!task) {
+        return res.status(404).json({
+            message: 'Task not found'
+        });
+    }
+
+    res.json(task);
 });
 
-//app.js setup - Irene
+app.listen(5000, () => {
+    console.log('Server running on port 5000');
+});
 
+
+//app.js setup - Irene
 module.exports = app;
