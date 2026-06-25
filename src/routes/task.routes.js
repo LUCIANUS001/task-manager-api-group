@@ -1,13 +1,14 @@
 const app = require("../app");
+const task = require("../data/task");
 const router = require("express").Router();
-let task = require("../data/task");
+let modTask = require("../data/task");
 
 
 
 
 // Get all tasks: Endpoint done by gomezgani kalua
 router.get("/", (req, res) => {
-  res.status(200).json(task);
+  res.status(200).json(modTask);
 });
 
 //Get tasks by id : Endpoint done by Gomezgani kalua
@@ -46,7 +47,7 @@ router.post('/', (req, res) => {
   // Validate required fields
   if (!title)  return res.status(400).json({ message: 'Title is required.' })
   const newTask = {
-    id: task.length + 1,
+    id: modTask.length + 1,
     title,
     description: description || '',
     status: status || 'pending'
