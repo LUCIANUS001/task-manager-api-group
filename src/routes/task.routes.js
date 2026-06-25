@@ -11,17 +11,18 @@ router.get("/", (req, res) => {
   res.status(200).json(modTask);
 });
 
-//Get tasks by id : Endpoint done by Gomezgani kalua
-router.get("/:id", (req,res) =>{
-  const id=parseInt(req.params.id);
-  const taskFound=task.find((t) => t.id === id);
-  if(!taskFound){
-    return res.status(404).json({error: "task not found"})
-  }
-  else{
-    res.status(200).json(taskFound)
-  }
-})
+//Get tasks by id : Endpoint done by Gomezgani kalua & dorothy
+router.get("/:id", (req, res) => {
+    const taskFound = task.find(t => t.id == req.params.id);
+
+    if (!taskFound) {
+        return res.status(404).json({
+            message: "Task not found"
+        });
+    }
+
+    res.status(200).json(taskFound);
+});
 
 
 
