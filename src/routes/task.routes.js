@@ -59,11 +59,15 @@ router.post('/', (req, res) => {
 //PUT  TASK ENDPOINT BY EMMANUEL ABRAHAM
 router.put('/:id', (req, res) => {
   const { title, completed } = req.body
+   // Find the task by id from the route parameter
   const task = tasks.find(t => t.id === parseInt(req.params.id, 10))
   if (!task) {return res.status(404).json({ message: 'Task not found.' })}
+   // Ensure at least one updatable field is provided
   if (title === undefined && completed === undefined) return res.status(400).json({ message: 'At least one field must be provided.' })
-    if (title !== undefined) return  task.title = title 
-    if (completed !== undefined) return  task.completed = completed 
+  // Apply only the fields that were included in the request  
+  if (title !== undefined) return task.title = title 
+  if (completed !== undefined) return task.completed = completed 
+  // Return the updated task to the client
   res.status(200).json(task)
 })
 
