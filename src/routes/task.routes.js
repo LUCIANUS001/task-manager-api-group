@@ -1,28 +1,37 @@
 const app = require("../app");
-const task = require("../data/task");
 const router = require("express").Router();
-let modTask = require("../data/task");
+let task = require("../data/task");
 
 
 
 
 // Get all tasks: Endpoint done by gomezgani kalua
 router.get("/", (req, res) => {
-  res.status(200).json(modTask);
+  res.status(200).json(task);
 });
 
-
+//Get tasks by id : Endpoint done by Gomezgani kalua
+router.get("/:id", (req,res) =>{
+  const id=parseInt(req.params.id);
+  const taskFound=task.find((t) => t.id === id);
+  if(!taskFound){
+    return res.status(404).json({error: "task not found"})
+  }
+  else{
+    res.status(200).json(taskFound)
+  }
+})
 
 
 
 //Delete a task by ID: Endpoint done by Jason Chukwuebuka
 router.delete("/:id", (req, res) => {
   const taskId = parseInt(req.params.id);
-  const deletedTask = modTask.find((t) => t.id === taskId);
+  const deletedTask = task.find((t) => t.id === taskId);
   if (!deletedTask) {
     return res.status(404).json({ error: "Task not found" });
   }
-  modTask = modTask.filter((t) => t.id !== taskId);
+  task = task.filter((t) => t.id !== taskId);
   res.status(200).json({ message: "Task deleted successfully" });
 });
 
@@ -32,17 +41,20 @@ router.delete("/:id", (req, res) => {
 
 //POST  TASK ENDPOINT BY EMMANUEL ABRAHAM
 router.post('/', (req, res) => {
-  const { title, status } = req.body;
-  // Validate required field
-  if (!title )  return res.status(400).json({ message: 'Title is required.'});
+  const { title, description, status } = req.body
+
+  // Validate required fields
+  if (!title)  return res.status(400).json({ message: 'Title is required.' })
   const newTask = {
     id: task.length + 1,
     title,
-    description
-  };
-  task.push(newTask);
-  res.status(201).json(newTask);
+    description: description || '',
+    status: status || 'pending'
+  }
+  task.push(newTask)
+  res.status(201).json(newTask)
 });
+
 
 
 
@@ -70,6 +82,7 @@ fields.forEach(field => {
 });
   res.status(200).json(modTask)
 })
+
 
 
 
