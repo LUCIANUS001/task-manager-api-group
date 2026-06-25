@@ -35,13 +35,27 @@ router.post('/', (req, res) => {
   // Validate required fields
   if (!title )  return res.status(400).json({ message: 'Title is required.'});
   const newTask = {
-    id: tasks.length + 1,
+    id: task.length + 1,
     title,
     description
   };
-  tasks.push(newTask);
+  task.push(newTask);
   res.status(201).json(newTask);
 });
+
+
+
+
+//PUT  TASK ENDPOINT BY EMMANUEL ABRAHAM
+router.put('/:id', (req, res) => {
+  const { title, completed } = req.body
+  const task = tasks.find(t => t.id === parseInt(req.params.id, 10))
+  if (!task) {return res.status(404).json({ message: 'Task not found.' })}
+  if (title === undefined && completed === undefined) return res.status(400).json({ message: 'At least one field must be provided.' })
+    if (title !== undefined) return  task.title = title 
+    if (completed !== undefined) return  task.completed = completed 
+  res.status(200).json(task)
+})
 
 
 
