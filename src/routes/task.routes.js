@@ -41,17 +41,20 @@ router.delete("/:id", (req, res) => {
 
 //POST  TASK ENDPOINT BY EMMANUEL ABRAHAM
 router.post('/', (req, res) => {
-  const { title, status } = req.body;
+  const { title, description, status } = req.body
+
   // Validate required fields
-  if (!title )  return res.status(400).json({ message: 'Title is required.'});
+  if (!title)  return res.status(400).json({ message: 'Title is required.' })
   const newTask = {
     id: task.length + 1,
     title,
-    description
-  };
-  task.push(newTask);
-  res.status(201).json(newTask);
+    description: description || '',
+    status: status || 'pending'
+  }
+  task.push(newTask)
+  res.status(201).json(newTask)
 });
+
 
 
 
