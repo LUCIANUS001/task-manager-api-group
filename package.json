@@ -2,6 +2,7 @@
   "name": "task-manager-api-group",
   "version": "1.0.0",
   "description": "",
+  "type":"module",
 <<<<<<< HEAD
   "main": "src/app.js",
 "scripts": {
