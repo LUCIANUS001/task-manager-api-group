@@ -1,13 +1,14 @@
 const app = require("../app");
+const task = require("../data/task");
 const router = require("express").Router();
-let task = require("../data/task");
+let modTask = require("../data/task");
 
 
 
 
 // Get all tasks: Endpoint done by gomezgani kalua
 router.get("/", (req, res) => {
-  res.status(200).json(task);
+  res.status(200).json(modTask);
 });
 
 //Get tasks by id : Endpoint done by Gomezgani kalua
@@ -27,11 +28,11 @@ router.get("/:id", (req,res) =>{
 //Delete a task by ID: Endpoint done by Jason Chukwuebuka
 router.delete("/:id", (req, res) => {
   const taskId = parseInt(req.params.id);
-  const deletedTask = task.find((t) => t.id === taskId);
+  const deletedTask = modTask.find((t) => t.id === taskId);
   if (!deletedTask) {
     return res.status(404).json({ error: "Task not found" });
   }
-  task = task.filter((t) => t.id !== taskId);
+  modTask = modTask.filter((t) => t.id !== taskId);
   res.status(200).json({ message: "Task deleted successfully" });
 });
 
@@ -45,11 +46,11 @@ router.post('/', (req, res) => {
   // Validate required fields
   if (!title )  return res.status(400).json({ message: 'Title is required.'});
   const newTask = {
-    id: task.length + 1,
+    id: modTask.length + 1,
     title,
     description
   };
-  task.push(newTask);
+  modTask.push(newTask);
   res.status(201).json(newTask);
 });
 
@@ -57,18 +58,27 @@ router.post('/', (req, res) => {
 
 
 //PUT  TASK ENDPOINT BY EMMANUEL ABRAHAM
-router.put('/:id', (req, res) => {
-  const { title, completed } = req.body
-   // Find the task by id from the route parameter
-  const task = tasks.find(t => t.id === parseInt(req.params.id, 10))
-  if (!task) {return res.status(404).json({ message: 'Task not found.' })}
-   // Ensure at least one updatable field is provided
-  if (title === undefined && completed === undefined) return res.status(400).json({ message: 'At least one field must be provided.' })
-  // Apply only the fields that were included in the request  
-  if (title !== undefined) return task.title = title 
-  if (completed !== undefined) return task.completed = completed 
-  // Return the updated task to the client
-  res.status(200).json(task)
+router.put('/:id', (req, res) => {  // Read the request body from the client
+  
+  const { title, description, status, completed } = req.body
+
+if (
+  title === undefined && description === undefined && status === undefined && completed === undefined)
+  return res.status(400).json({ message: 'At least one field must be provided.' });
+  // Find the task by its numeric id from the route parameter
+  const modTask = task.find(t => t.id === parseInt(req.params.id, 10))
+  if (!modTask) {
+    return res.status(404).json({ message: 'Task not found.' })
+  }
+  // Apply only the fields that were included in the request
+  const fields = ['title', 'description', 'status', 'completed'];
+
+fields.forEach(field => {
+  if (req.body[field] !== undefined) {
+    modTask[field] = req.body[field];
+  }
+});
+  res.status(200).json(modTask)
 })
 
 
