@@ -18,4 +18,18 @@ router.delete("/:id", (req, res) => {
   res.status(200).json({ message: "Task deleted successfully" });
 });
 
+     //POST  TASK ENDPOINT BY EMMANUEL ABRAHAM
+router.post('/task', (req, res) => {
+  const { title, status } = req.body;
+  // Validate required fields
+  if (!title )  return res.status(400).json({ message: 'Title is required.'});
+  const newTask = {
+    id: tasks.length + 1,
+    title,
+    description
+  };
+  tasks.push(newTask);
+  res.status(201).json(newTask);
+});
+
 module.exports = router;
