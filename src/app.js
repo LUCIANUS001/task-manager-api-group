@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const express = require('express');
 const app = express();
 
@@ -24,10 +26,13 @@ app.get('/tasks/:id', (req, res) => {
     res.json(task);
 });
 
+<<<<<<< HEAD
 app.listen(5000, () => {
     console.log('Server running on port 5000');
 });
 
 
 //app.js setup - Irene
+=======
+>>>>>>> 019870786b5d56d46344faa85f9ae3513e5b0af8
 module.exports = app;

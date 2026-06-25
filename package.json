@@ -2,11 +2,19 @@
   "name": "task-manager-api-group",
   "version": "1.0.0",
   "description": "",
+<<<<<<< HEAD
   "main": "src/app.js",
 "scripts": {
   "start": "node src/app.js",
   "test": "echo \"Error: no test specified\" && exit 1"
 },
+=======
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js"
+  },
+>>>>>>> 019870786b5d56d46344faa85f9ae3513e5b0af8
   "repository": {
     "type": "git",
     "url": "git+https://github.com/LUCIANUS001/task-manager-api-group.git"
@@ -20,6 +28,10 @@
   },
   "homepage": "https://github.com/LUCIANUS001/task-manager-api-group#readme",
   "dependencies": {
+    "dotenv": "^17.4.2",
     "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
   }
 }
