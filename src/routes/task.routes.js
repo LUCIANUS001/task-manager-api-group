@@ -28,11 +28,11 @@ router.get("/:id", (req,res) =>{
 //Delete a task by ID: Endpoint done by Jason Chukwuebuka
 router.delete("/:id", (req, res) => {
   const taskId = parseInt(req.params.id);
-  const deletedTask = modTask.find((t) => t.id === taskId);
+  const deletedTask = task.find((t) => t.id === taskId);
   if (!deletedTask) {
     return res.status(404).json({ error: "Task not found" });
   }
-  modTask = modTask.filter((t) => t.id !== taskId);
+  task = task.filter((t) => t.id !== taskId);
   res.status(200).json({ message: "Task deleted successfully" });
 });
 
@@ -42,17 +42,20 @@ router.delete("/:id", (req, res) => {
 
 //POST  TASK ENDPOINT BY EMMANUEL ABRAHAM
 router.post('/', (req, res) => {
-  const { title, status } = req.body;
+  const { title, description, status } = req.body
+
   // Validate required fields
-  if (!title )  return res.status(400).json({ message: 'Title is required.'});
+  if (!title)  return res.status(400).json({ message: 'Title is required.' })
   const newTask = {
     id: modTask.length + 1,
     title,
-    description
-  };
-  modTask.push(newTask);
-  res.status(201).json(newTask);
+    description: description || '',
+    status: status || 'pending'
+  }
+  task.push(newTask)
+  res.status(201).json(newTask)
 });
+
 
 
 
@@ -80,6 +83,7 @@ fields.forEach(field => {
 });
   res.status(200).json(modTask)
 })
+
 
 
 
