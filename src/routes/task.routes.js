@@ -10,7 +10,17 @@ router.get("/", (req, res) => {
   res.status(200).json(task);
 });
 
-
+//Get tasks by id : Endpoint done by Gomezgani kalua
+router.get("/:id", (req,res) =>{
+  const id=parseInt(req.params.id);
+  const taskFound=task.find((t) => t.id === id);
+  if(!taskFound){
+    return res.status(404).json({error: "task not found"})
+  }
+  else{
+    res.status(200).json(taskFound)
+  }
+})
 
 
 
