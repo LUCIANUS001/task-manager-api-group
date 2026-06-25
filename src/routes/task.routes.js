@@ -2,6 +2,11 @@ const app = require("../app");
 const router = require("express").Router();
 let task = require("../data/task");
 
+// Get all tasks: Endpoint done by gomezgani kalua
+router.get("/", (req, res) => {
+  res.status(200).json(task);
+});
+
 //Delete a task by ID: Endpoint done by Jason Chukwuebuka
 router.delete("/:id", (req, res) => {
   const taskId = parseInt(req.params.id);
