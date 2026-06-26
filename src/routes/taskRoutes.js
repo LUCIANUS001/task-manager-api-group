@@ -48,7 +48,7 @@ router.post('/', (req, res) => {
   // Validate required fields
   if (!title)  return res.status(400).json({ message: 'Title is required.' })
   const newTask = {
-    id: modTask.length + 1,
+    id: task.length + 1,
     title,
     description: description || '',
     status: status || 'pending'
