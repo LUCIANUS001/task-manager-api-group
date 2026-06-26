@@ -13,9 +13,9 @@ An industrial-grade, lightweight RESTful API built with Node.js and Express.js t
 | **Server Bootstrapping (`server.js`) & Port Listener** | `1-dara`                        |
 | **Global State Architecture (`data.js` Relocation)**   | `jasonchukwuebuka01`            |
 | **GET /tasks (Fetch All Tasks)**                       | `Kaluagomezgani-ship-it`        |
-| **GET /tasks/:id (Fetch Single Task)**                 | `Null`                          |
+| **GET /tasks/:id (Fetch Single Task)**                 | `Kaluagomezgani-ship-it`        |
 | **POST /tasks (Create Task)**                          | `NaseThaBoss`                   |
-| **PUT /tasks/:id (Update Task)**                       | `Null`                          |
+| **PUT /tasks/:id (Update Task)**                       | `NaseThaBoss`                   |
 | **DELETE /tasks/:id (Delete Task)**                    | `Jasonchukwuebuka01`            |
 
 ---
@@ -70,16 +70,21 @@ Follow these steps to run and test the repository on your machine:
 
 1. Clone the Repository
 
-   ```git clone https://github.com/LUCIANUS001/task-manager-api-group.git
-
-   cd task-manager-api-group
    ```
+   git clone https://github.com/LUCIANUS001/task-manager-api-group.git
+   ```
+
+```
+ cd task-manager-api-group
+```
 
 2. Install Project Dependencies
 
-   ```npm install
-
+   ```
+     npm install
    ```
 
 3. Execute the Development Server
-   npm run dev
+   ```
+     npm run dev
+   ```
