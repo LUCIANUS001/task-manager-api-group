@@ -11,6 +11,9 @@ router.get("/", (req, res) => {
   res.status(200).json(task);
 });
 
+
+
+
 //Get tasks by id : Endpoint done by Gomezgani kalua & dorothy
 router.get("/:id", (req, res) => {
     const taskFound = task.find(t => t.id == req.params.id);
@@ -26,13 +29,15 @@ router.get("/:id", (req, res) => {
 
 
 
+
+
 //Delete a task by ID: Endpoint done by Jason Chukwuebuka
 router.delete("/:id", (req, res) => {
   const taskId = parseInt(req.params.id);
   const deletedTask = task.find((t) => t.id === taskId);
   if (!deletedTask) {
     return res.status(404).json({ error: "Task not found" });
-  }
+  };
   task = task.filter((t) => t.id !== taskId);
   res.status(200).json({ message: "Task deleted successfully" });
 });
@@ -56,6 +61,7 @@ router.post('/', (req, res) => {
   task.push(newTask)
   res.status(201).json(newTask)
 });
+
 
 
 
