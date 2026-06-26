@@ -1,14 +1,14 @@
 const app = require("../app");
-const task = require("../data/task");
+let task = require("../data/task");
 const router = require("express").Router();
-let modTask = require("../data/task");
+
 
 
 
 
 // Get all tasks: Endpoint done by gomezgani kalua
 router.get("/", (req, res) => {
-  res.status(200).json(modTask);
+  res.status(200).json(task);
 });
 
 //Get tasks by id : Endpoint done by Gomezgani kalua & dorothy
@@ -70,7 +70,7 @@ if (
   title === undefined && description === undefined && status === undefined && completed === undefined)
   return res.status(400).json({ message: 'At least one field must be provided.' });
   // Find the task by its numeric id from the route parameter
-  const modTask = task.find(t => t.id === parseInt(req.params.id, 10))
+  let modTask = task.find(t => t.id === parseInt(req.params.id, 10))
   if (!modTask) {
     return res.status(404).json({ message: 'Task not found.' })
   }
